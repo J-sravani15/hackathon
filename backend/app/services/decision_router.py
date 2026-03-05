@@ -1,10 +1,13 @@
-def route_decision(risk, probability):
+def route_decision(probability, risk_level):
+    """
+    Decide what action to take for the insurance quote.
+    """
 
-    if risk == "LOW" and probability > 0.7:
-        return "AUTO_APPROVE"
+    if probability > 0.7 and risk_level == "LOW":
+        return "AUTO APPROVE"
 
     elif probability > 0.4:
-        return "AGENT_FOLLOWUP"
+        return "AGENT FOLLOW-UP"
 
     else:
-        return "ESCALATE_TO_UNDERWRITER"
+        return "ESCALATE TO UNDERWRITER"

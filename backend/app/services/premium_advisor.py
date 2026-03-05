@@ -1,10 +1,20 @@
-def adjust_premium(data, probability):
+def adjust_premium(quoted_premium, probability, risk_level):
+    """
+    Adjust premium based on conversion probability and risk.
+    """
 
-    premium = data.quoted_premium
+    premium = quoted_premium
 
+    # If probability is low → reduce premium to attract customer
     if probability < 0.4:
-        premium *= 0.85
-    elif probability < 0.6:
-        premium *= 0.95
+        premium = premium * 0.9
 
-    return round(premium,2)
+    # If probability is very high → increase premium slightly
+    elif probability > 0.7:
+        premium = premium * 1.05
+
+    # If risk is high → increase premium
+    if risk_level == "HIGH":
+        premium = premium * 1.1
+
+    return round(premium, 2)
