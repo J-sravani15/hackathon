@@ -50,7 +50,7 @@ async function processQuote() {
       result.conversion_probability || result.probability || "0.42";
 
     const premium =
-      result.recommended_premium || result.premium || "";
+      result.recommended_premium || result.premium || "1200";
 
     const decision =
       result.decision || "autobind";
