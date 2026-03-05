@@ -1,15 +1,27 @@
 from fastapi import APIRouter
-from app.schemas.predict_schema import PredictionRequest, PredictionResponse
-from app.services.ml_service import run_prediction
+from app.schemas.predict_schema import QuoteInput
+from app.services.risk_profiler import calculate_risk
+from app.services.predict_service import predict_conversion
+from app.services.premium_advisor import adjust_premium
+from app.services.decision_router import route_decision
 
-router = APIRouter(prefix="/api")
+router = APIRouter()
 
-@router.post("/predict", response_model=PredictionResponse)
-async def predict(data: PredictionRequest):
+@router.post("/predict")
 
-    prediction, confidence = run_prediction(data.text)
+def predict(data:QuoteInput):
 
-    return PredictionResponse(
-        prediction=prediction,
-        confidence=confidence
-    )
+    risk = calculate_risk(data)
+
+    prediction,probability = predict_conversion(data)
+
+    premium = adjust_premium(data,probability)
+
+    decision = route_decision(risk,probability)
+
+    return {
+        "risk":risk,
+        "conversion_probability":probability,
+        "adjusted_premium":premium,
+        "decision":decision
+    }
