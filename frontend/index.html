@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Autonomous Quote Agent Dashboard</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f4f6f9;
+padding:40px;
+}
+
+h1{
+color:#333;
+}
+
+input{
+padding:10px;
+width:250px;
+margin-bottom:10px;
+}
+
+button{
+padding:10px 20px;
+background:#0077ff;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+background:#0055cc;
+}
+
+.section{
+background:white;
+padding:15px;
+margin-top:20px;
+border-left:5px solid #0077ff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🚗 Autonomous Quote Agent Dashboard</h1>
+
+<h2>Quote Input</h2>
+
+<input id="Driver_Age" placeholder="Driver Age"><br>
+<input id="Driving_Exp" placeholder="Driving Experience"><br>
+<input id="Prev_Accidents" placeholder="Previous Accidents"><br>
+<input id="Prev_Citations" placeholder="Previous Citations"><br>
+<input id="Coverage" placeholder="Coverage Level"><br>
+<input id="Veh_Usage" placeholder="Vehicle Usage"><br>
+<input id="Annual_Miles_Range" placeholder="Annual Miles Range"><br>
+<input id="Vehicle_Cost_Range" placeholder="Vehicle Cost Range"><br>
+<input id="Sal_Range" placeholder="Salary Range"><br>
+<input id="Quoted_Premium" placeholder="Quoted Premium"><br><br>
+
+<button onclick="processQuote()">Process Quote</button>
+
+<h2>Agent Pipeline</h2>
+
+<div class="section" id="agent1">Risk Profiler: Waiting</div>
+<div class="section" id="agent2">Conversion Predictor: Waiting</div>
+<div class="section" id="agent3">Premium Advisor: Waiting</div>
+<div class="section" id="agent4">Decision Router: Waiting</div>
+
+<h2>Result</h2>
+
+<div class="section" id="risk"></div>
+<div class="section" id="probability"></div>
+<div class="section" id="premium"></div>
+<div class="section" id="decision"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
