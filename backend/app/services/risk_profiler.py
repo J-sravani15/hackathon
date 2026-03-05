@@ -1,10 +1,6 @@
 def calculate_risk(data):
 
-    score = (
-        data.prev_accidents * 3 +
-        data.prev_citations * 2 +
-        data.driver_age * 0.01
-    )
+    score = data.Prev_Accidents * 3 + data.Prev_Citations * 2
 
     if score < 3:
         return "LOW"
