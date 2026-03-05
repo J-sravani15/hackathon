@@ -2,82 +2,264 @@
 <html>
 
 <head>
-<title>Autonomous Quote Agent Dashboard</title>
+  <title>Autonomous Quote Agent</title>
 
-<style>
-body{
-font-family: Arial;
-background:#f4f6f9;
-padding:40px;
-}
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f1b2a;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
 
-h1{
-color:#333;
-}
+    .container {
+      width: 1000px;
+      margin: auto;
+      padding: 30px;
+    }
 
-input{
-padding:10px;
-width:250px;
-margin-bottom:10px;
-}
+    h1 {
+      text-align: center;
+      margin-bottom: 5px;
+    }
 
-button{
-padding:10px 20px;
-background:#0077ff;
-color:white;
-border:none;
-cursor:pointer;
-}
+    .subtitle {
+      text-align: center;
+      color: #9aa7b3;
+      margin-bottom: 30px;
+    }
 
-button:hover{
-background:#0055cc;
-}
+    .card {
+      background: #172a40;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+    }
 
-.section{
-background:white;
-padding:15px;
-margin-top:20px;
-border-left:5px solid #0077ff;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #2f3f55;
+    }
 
-</style>
+    .grid input:nth-child(odd) {
+      border-right: 2px solid #2f3f55;
+      padding-right: 10px;
+    }
+
+    .grid input:nth-child(even) {
+      padding-left: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      background: #243a58;
+      color: white;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2e7de9;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: #1e63c4;
+    }
+
+    .agent {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background: #0f2034;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+
+    .analytics {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .analytics-box {
+      background: #0f2034;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .result {
+      background: #0f2034;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 6px;
+    }
+
+    .highlight {
+      background: #2e7de9;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .bar {
+      height: 8px;
+      background: #243a58;
+      border-radius: 10px;
+      margin-top: 6px;
+    }
+
+    .bar-fill {
+      height: 8px;
+      border-radius: 10px;
+    }
+
+    .green {
+      background: #3bd671;
+    }
+
+    .orange {
+      background: #f5a623;
+    }
+
+    .red {
+      background: #ff4d4d;
+    }
+  </style>
 
 </head>
 
 <body>
 
-<h1>🚗 Autonomous Quote Agent Dashboard</h1>
+  <div class="container">
 
-<h2>Quote Input</h2>
+    <h1>Autonomous Quote Agent</h1>
+    <div class="subtitle">AI-Powered Multi-Agent Insurance System</div>
 
-<input id="Driver_Age" placeholder="Driver Age"><br>
-<input id="Driving_Exp" placeholder="Driving Experience"><br>
-<input id="Prev_Accidents" placeholder="Previous Accidents"><br>
-<input id="Prev_Citations" placeholder="Previous Citations"><br>
-<input id="Coverage" placeholder="Coverage Level"><br>
-<input id="Veh_Usage" placeholder="Vehicle Usage"><br>
-<input id="Annual_Miles_Range" placeholder="Annual Miles Range"><br>
-<input id="Vehicle_Cost_Range" placeholder="Vehicle Cost Range"><br>
-<input id="Sal_Range" placeholder="Salary Range"><br>
-<input id="Quoted_Premium" placeholder="Quoted Premium"><br><br>
+    <div class="card">
 
-<button onclick="processQuote()">Process Quote</button>
+      <h3>Quote Input</h3>
 
-<h2>Agent Pipeline</h2>
+      <div class="grid">
 
-<div class="section" id="agent1">Risk Profiler: Waiting</div>
-<div class="section" id="agent2">Conversion Predictor: Waiting</div>
-<div class="section" id="agent3">Premium Advisor: Waiting</div>
-<div class="section" id="agent4">Decision Router: Waiting</div>
+        <input id="Driver_Age" placeholder="Driver Age">
+        <input id="Driving_Exp" placeholder="Driver Experience">
 
-<h2>Result</h2>
+        <input id="Prev_Accidents" placeholder="Accident History">
+        <input id="Prev_Citations" placeholder="Previous Citations">
 
-<div class="section" id="risk"></div>
-<div class="section" id="probability"></div>
-<div class="section" id="premium"></div>
-<div class="section" id="decision"></div>
+        <input id="Coverage" placeholder="Coverage Type">
+        <input id="Veh_Usage" placeholder="Vehicle Usage">
 
-<script src="script.js"></script>
+        <input id="Annual_Miles_Range" placeholder="Annual Miles">
+        <input id="Vehicle_Cost_Range" placeholder="Vehicle Cost Risk">
+
+        <input id="Sal_Range" placeholder="Salary Range">
+        <input id="Quoted_Premium" placeholder="Quoted Premium">
+
+      </div>
+
+      <button onclick="processQuote()">Process Quote</button>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Agent Pipeline</h3>
+
+      <div class="agent">
+        <div>Risk Profiler</div>
+        <div id="agent1">Waiting</div>
+      </div>
+
+      <div class="agent">
+        <div>Conversion Predictor</div>
+        <div id="agent2">Waiting</div>
+      </div>
+
+      <div class="agent">
+        <div>Premium Advisor</div>
+        <div id="agent3">Waiting</div>
+      </div>
+
+      <div class="agent">
+        <div>Decision Router</div>
+        <div id="agent4">Waiting</div>
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Risk Analytics</h3>
+
+      <div class="analytics">
+
+        <div class="analytics-box">
+          <h4>Driver Experience</h4>
+          <div class="bar">
+            <div id="driverExpBar" class="bar-fill green" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="analytics-box">
+          <h4>Accident History</h4>
+          <div class="bar">
+            <div id="accidentBar" class="bar-fill red" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="analytics-box">
+          <h4>Vehicle Cost Risk</h4>
+          <div class="bar">
+            <div id="vehicleBar" class="bar-fill orange" style="width:0%"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Model Confidence</h3>
+      <div class="result" id="probability"></div>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Final Decision</h3>
+
+      <div class="result" id="risk"></div>
+      <div class="highlight" id="premium"></div>
+      <div class="result" id="decision"></div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 
 </body>
+
 </html>
