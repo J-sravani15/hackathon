@@ -73,14 +73,14 @@ const requestData = {
 
     /* ANALYTICS BARS */
 
-    document.getElementById("driverExpBar").style.width =
-      (requestData.Driving_Exp * 5) + "%";
+document.getElementById("driverExpBar").style.width =
+Math.min(requestData.Driving_Exp * 5, 100) + "%";
 
-    document.getElementById("accidentBar").style.width =
-      (requestData.Prev_Accidents * 20) + "%";
+document.getElementById("accidentBar").style.width =
+Math.min(requestData.Prev_Accidents * 20, 100) + "%";
 
-    document.getElementById("vehicleBar").style.width =
-      (requestData.Vehicl_Cost_Range * 10) + "%";
+document.getElementById("vehicleBar").style.width =
+Math.min(requestData.Vehicle_Cost_Range * 10, 100) + "%";
 
   }
 
