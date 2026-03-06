@@ -1,19 +1,23 @@
 async function processQuote() {
+
   const requestData = {
 
-    Driver_Age: parseInt(document.getElementById("Driver_Age").value) || 0,
-    Driving_Exp: parseInt(document.getElementById("Driving_Exp").value) || 0,
-    Prev_Accidents: parseInt(document.getElementById("Prev_Accidents").value) || 0,
-    Prev_Citations: parseInt(document.getElementById("Prev_Citations").value) || 0,
-    Coverage: parseInt(document.getElementById("Coverage").value) || 0,
-    Veh_Usage: parseInt(document.getElementById("Veh_Usage").value) || 0,
-    Annual_Miles_Range: parseInt(document.getElementById("Annual_Miles_Range").value) || 0,
+    Driver_Age: parseInt(document.getElementById("Driver_Age").value),
+    Driving_Exp: parseInt(document.getElementById("Driving_Exp").value),
+    Prev_Accidents: parseInt(document.getElementById("Prev_Accidents").value),
+    Prev_Citations: parseInt(document.getElementById("Prev_Citations").value),
 
-    Vehicl_Cost_Range: parseInt(document.getElementById("Vehicle_Cost_Range").value) || 0,
+    Coverage: document.getElementById("Coverage").value,
+    Veh_Usage: document.getElementById("Veh_Usage").value,
+    Annual_Miles_Range: document.getElementById("Annual_Miles_Range").value,
+    Vehicle_Cost_Range: document.getElementById("Vehicle_Cost_Range").value,
+    Sal_Range: document.getElementById("Sal_Range").value,
 
-    Sal_Range: parseInt(document.getElementById("Sal_Range").value) || 0,
-    Quoted_Premium: parseFloat(document.getElementById("Quoted_Premium").value) || 0
+    Quoted_Premium: parseFloat(document.getElementById("Quoted_Premium").value)
+
   };
+
+  /* Pipeline status */
 
   document.getElementById("agent1").innerHTML = "Running...";
   document.getElementById("agent2").innerHTML = "Waiting";
@@ -23,64 +27,54 @@ async function processQuote() {
   try {
 
     const response = await fetch("http://127.0.0.1:8000/predict", {
+
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestData)
+
     });
 
     const result = await response.json();
 
-    console.log("Backend response:", result);
-
-
-    /* PIPELINE STATUS */
+    /* Pipeline completed */
 
     document.getElementById("agent1").innerHTML = "Completed";
     document.getElementById("agent2").innerHTML = "Completed";
     document.getElementById("agent3").innerHTML = "Completed";
     document.getElementById("agent4").innerHTML = "Completed";
 
-
-    /* HANDLE DIFFERENT BACKEND FIELD NAMES */
-
-    const risk =
-      result.risk_level || result.risk || "medium";
-
-    const probability =
-      result.conversion_probability || result.probability || "0.42";
-
-    const premium =
-      result.recommended_premium || result.premium || "1200";
-
-    const decision =
-      result.decision || "autobind";
-
-
-    /* DISPLAY RESULTS */
+    /* Results */
 
     document.getElementById("risk").innerHTML =
-      "Risk Tier : " + risk;
+      "Risk Tier : " + result.risk_level;
 
     document.getElementById("probability").innerHTML =
-      "Model Confidence : " + probability;
+      "Model Confidence : " + result.conversion_probability;
 
     document.getElementById("premium").innerHTML =
-      "$" + premium + "/yr";
+      "$" + result.recommended_premium + "/yr";
 
     document.getElementById("decision").innerHTML =
-      "Decision : " + decision;
+      "Decision : " + result.decision;
 
+    /* Analytics bars */
 
-    /* ANALYTICS BARS */
+    const exp = requestData.Driving_Exp || 0;
+    const accidents = requestData.Prev_Accidents || 0;
+    const vehicle = requestData.Vehicle_Cost_Range;
 
-document.getElementById("driverExpBar").style.width =
-Math.min(requestData.Driving_Exp * 5, 100) + "%";
+    document.getElementById("driverExpBar").style.width = (exp * 5) + "%";
+    document.getElementById("accidentBar").style.width = (accidents * 20) + "%";
 
-document.getElementById("accidentBar").style.width =
-Math.min(requestData.Prev_Accidents * 20, 100) + "%";
-
-document.getElementById("vehicleBar").style.width =
-Math.min(requestData.Vehicle_Cost_Range * 10, 100) + "%";
+    if (vehicle === "Low") {
+      document.getElementById("vehicleBar").style.width = "30%";
+    }
+    else if (vehicle === "Medium") {
+      document.getElementById("vehicleBar").style.width = "60%";
+    }
+    else if (vehicle === "High") {
+      document.getElementById("vehicleBar").style.width = "90%";
+    }
 
   }
 
