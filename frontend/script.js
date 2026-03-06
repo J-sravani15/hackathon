@@ -1,19 +1,19 @@
 async function processQuote() {
-const requestData = {
+  const requestData = {
 
-  Driver_Age: parseInt(document.getElementById("Driver_Age").value) || 0,
-  Driving_Exp: parseInt(document.getElementById("Driving_Exp").value) || 0,
-  Prev_Accidents: parseInt(document.getElementById("Prev_Accidents").value) || 0,
-  Prev_Citations: parseInt(document.getElementById("Prev_Citations").value) || 0,
-  Coverage: parseInt(document.getElementById("Coverage").value) || 0,
-  Veh_Usage: parseInt(document.getElementById("Veh_Usage").value) || 0,
-  Annual_Miles_Range: parseInt(document.getElementById("Annual_Miles_Range").value) || 0,
+    Driver_Age: parseInt(document.getElementById("Driver_Age").value) || 0,
+    Driving_Exp: parseInt(document.getElementById("Driving_Exp").value) || 0,
+    Prev_Accidents: parseInt(document.getElementById("Prev_Accidents").value) || 0,
+    Prev_Citations: parseInt(document.getElementById("Prev_Citations").value) || 0,
+    Coverage: parseInt(document.getElementById("Coverage").value) || 0,
+    Veh_Usage: parseInt(document.getElementById("Veh_Usage").value) || 0,
+    Annual_Miles_Range: parseInt(document.getElementById("Annual_Miles_Range").value) || 0,
 
-  Vehicl_Cost_Range: parseInt(document.getElementById("Vehicle_Cost_Range").value) || 0,
+    Vehicl_Cost_Range: parseInt(document.getElementById("Vehicle_Cost_Range").value) || 0,
 
-  Sal_Range: parseInt(document.getElementById("Sal_Range").value) || 0,
-  Quoted_Premium: parseFloat(document.getElementById("Quoted_Premium").value) || 0
-};
+    Sal_Range: parseInt(document.getElementById("Sal_Range").value) || 0,
+    Quoted_Premium: parseFloat(document.getElementById("Quoted_Premium").value) || 0
+  };
 
   document.getElementById("agent1").innerHTML = "Running...";
   document.getElementById("agent2").innerHTML = "Waiting";
